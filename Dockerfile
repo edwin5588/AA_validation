@@ -55,4 +55,5 @@ RUN mkdir -p /home/data_repo/
 COPY testdata/* /home/test_data/
 COPY src/* /home/AA/
 COPY data_repo/* /home/data_repo/
+COPY lic/* /home/programs/mosek/8/licenses/
 
