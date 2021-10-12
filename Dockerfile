@@ -19,13 +19,10 @@ ADD https://bootstrap.pypa.io/pip/2.7/get-pip.py /home/
 RUN python2 get-pip.py
 RUN python2 -m pip install --upgrade "pip < 21.0"
 RUN apt-get update && apt-get install -y
-RUN apt-get install libbz2-dev liblzma-dev gfortran zlib1g-dev samtools wget unzip curl -y
+RUN apt-get install libbz2-dev liblzma-dev gfortran zlib1g-dev samtools wget tar unzip curl -y
 #RUN update-alternatives --install /usr/bin/python python /usr/bin/python2 10
 #RUN update-alternatives --config python
-RUN pip2 install Cython
-RUN pip2 install numpy scipy matplotlib 
-RUN pip2 install pysam==0.15.2
-RUN pip2 install Flask
+RUN pip2 install Cython numpy scipy matplotlib pysam==0.15.2 Flask
 
 RUN cd /home/programs && wget http://download.mosek.com/stable/8.0.0.60/mosektoolslinux64x86.tar.bz2
 RUN cd /home/programs && tar xf mosektoolslinux64x86.tar.bz2
@@ -54,6 +51,6 @@ RUN mkdir -p /home/AA/
 RUN mkdir -p /home/data_repo/
 COPY testdata/* /home/test_data/
 COPY src/* /home/AA/
-COPY data_repo/* /home/data_repo/
 COPY lic/* /home/programs/mosek/8/licenses/
+COPY zip/* /home/data_repo/
 
