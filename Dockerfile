@@ -19,7 +19,7 @@ ADD https://bootstrap.pypa.io/pip/2.7/get-pip.py /home/
 RUN python2 get-pip.py
 RUN python2 -m pip install --upgrade "pip < 21.0"
 RUN apt-get update && apt-get install -y
-RUN apt-get install libbz2-dev liblzma-dev gfortran zlib1g-dev samtools wget tar unzip curl -y
+RUN apt-get install libbz2-dev liblzma-dev gfortran zlib1g-dev samtools bash wget tar unzip curl -y
 #RUN update-alternatives --install /usr/bin/python python /usr/bin/python2 10
 #RUN update-alternatives --config python
 RUN pip2 install Cython numpy scipy matplotlib pysam==0.15.2 Flask
@@ -42,15 +42,14 @@ RUN echo export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/programs/mosek/8/tools/pl
 RUN echo export MOSEKLM_LICENSE_FILE=/home/programs/mosek/8/licenses >> ~/.bashrc
 RUN cd /home/programs/mosek/8/tools/platform/linux64x86/python/2/ && python2 setup.py install
 RUN echo export AA_DATA_REPO=/home/data_repo >> ~/.bashrc
-ADD https://github.com/jluebeck/AmpliconArchitect/archive/master.zip /home/programs
-RUN cd /home/programs && unzip master.zip
 
 # custom things at the end 
 RUN mkdir -p /home/test_data/
 RUN mkdir -p /home/AA/
 RUN mkdir -p /home/data_repo/
-COPY testdata/* /home/test_data/
+# COPY testdata/* /home/test_data/
 COPY src/* /home/AA/
 COPY lic/* /home/programs/mosek/8/licenses/
 COPY zip/* /home/data_repo/
+COPY scripts/* /home/
 
