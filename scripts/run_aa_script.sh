@@ -3,6 +3,12 @@
 
 tar -xf /home/data_repo/$1.tar.gz
 cp $2 /home/programs/mosek/8/licenses/
+cp $2 /home/programs/mosek/
+cp $2 /root/mosek/mosek.lic
+export MOSEKLM_LICENSE_FILE=$2 >> ~/.bashrc && source ~/.bashrc
+
+MOSEKLM_LICENSE_FILE=/home/programs/mosek/8/licenses
+export MOSEKLM_LICENSE_FILE
 BAMFILE=$3
 bambase="$(basename -- $BAMFILE)"
 BEDFILE=$4

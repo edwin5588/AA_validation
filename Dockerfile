@@ -44,12 +44,13 @@ RUN cd /home/programs/mosek/8/tools/platform/linux64x86/python/2/ && python2 set
 RUN echo export AA_DATA_REPO=/home/data_repo >> ~/.bashrc
 
 # custom things at the end 
-RUN mkdir -p /home/test_data/
+RUN mkdir -p /home/testdata/
 RUN mkdir -p /home/AA/
 RUN mkdir -p /home/data_repo/
-# COPY testdata/* /home/test_data/
 COPY src/* /home/AA/
 COPY lic/* /home/programs/mosek/8/licenses/
 COPY zip/* /home/data_repo/
 COPY scripts/* /home/
+# testing purposes only
+# COPY testdata/* /home/testdata/
 
