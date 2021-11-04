@@ -113,7 +113,7 @@ elif cstats is None:
 final = args.final
 
 if cstats[0] <= final:
-    exit()    
+    exit()
 ratio = float(final) / float(cstats[0])
 
 
@@ -127,7 +127,7 @@ rulist = []
 t0 = time()
 b2 = pysam.Samfile(downsample_dir + '/' + os.path.basename(args.bam[0])[:-4] + '.DS.bam', 'wb', template = bamFile)
 for a in bamFile.fetch():
-    random.seed(a.query_name + str(t0))
+    random.seed(os.environ.get('DOWNSAMPLE'))
     random.uniform(0,1)
     ru = random.uniform(0, 1)
     if ru < ratio:
@@ -144,5 +144,3 @@ print ("Downsampling:", args.bam[0], float(cstats[0]), final, ratio)
 #             c2.write(a)
 #     c2.close()
 #     pysam.index(downsample_dir + '/' + os.path.basename(args.cbam)[:-4] + '.DS.bam')
-
-
