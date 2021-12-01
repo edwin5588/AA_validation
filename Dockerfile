@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 # Build in non-interactive mode for online continuous building
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Set the working directory to /app
+# Set the working directory to /am
 WORKDIR /home/
 
 #Copy AA and mosek to image
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y
 RUN apt-get install libbz2-dev liblzma-dev gfortran zlib1g-dev samtools bash wget tar unzip curl -y
 #RUN update-alternatives --install /usr/bin/python python /usr/bin/python2 10
 #RUN update-alternatives --config python
-RUN pip2 install Cython numpy scipy matplotlib pysam==0.15.2 Flask
+RUN pip2 install Cython numpy scipy matplotlib pysam==0.15.2 Flask pysftp
 
 RUN cd /home/programs && wget http://download.mosek.com/stable/8.0.0.60/mosektoolslinux64x86.tar.bz2
 RUN cd /home/programs && tar xf mosektoolslinux64x86.tar.bz2
@@ -47,10 +47,14 @@ RUN echo export AA_DATA_REPO=/home/data_repo >> ~/.bashrc
 RUN mkdir -p /home/testdata/
 RUN mkdir -p /home/AA/
 RUN mkdir -p /home/data_repo/
+RUN mkdir -p /home/tempdata/results/
+RUN mkdir -p /home/tempdata/bed/
+RUN mkdir -p /home/tempdata/bambai/
 COPY src/* /home/AA/
 COPY lic/* /home/programs/mosek/8/licenses/
 COPY zip/* /home/data_repo/
 COPY scripts/* /home/
+COPY functions.py /home/
 # testing purposes only
 # COPY testdata/* /home/testdata/
 
